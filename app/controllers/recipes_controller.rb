@@ -4,7 +4,7 @@ require 'open-uri'
 class RecipesController < ApplicationController
   def index
     @recipes = Recipe.all
-    render json: @recipes
+    render json: @recipes, include: [:ingredients, :steps]
   end
 
   def create
@@ -12,14 +12,14 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_object.except(:ingredients, :steps))
     if @recipe.save
       recipe_object[:ingredients].each do |ingr|
-        Ingredient.create(content: ingr.slice, recipe: @recipe)
+        Ingredient.create(content: ingr.strip, recipe: @recipe)
       end
 
       recipe_object[:steps].each_with_index do |step, i|
-        Step.create(content: step.slice, number: i + 1, recipe: @recipe)
+        Step.create(content: step.strip, number: i + 1, recipe: @recipe)
       end
 
-      render json: @recipe
+      render json: @recipe, include: [:ingredients, :steps]
     end
   end
 

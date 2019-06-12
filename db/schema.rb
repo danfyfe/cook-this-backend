@@ -18,8 +18,6 @@ ActiveRecord::Schema.define(version: 2019_06_12_201215) do
   create_table "ingredients", force: :cascade do |t|
     t.string "content"
     t.integer "recipe_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "notes", force: :cascade do |t|
@@ -50,8 +48,6 @@ ActiveRecord::Schema.define(version: 2019_06_12_201215) do
     t.string "content"
     t.integer "number"
     t.integer "recipe_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

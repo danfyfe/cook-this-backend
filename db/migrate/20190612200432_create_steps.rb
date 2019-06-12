@@ -4,8 +4,6 @@ class CreateSteps < ActiveRecord::Migration[5.2]
       t.string :content
       t.integer :number
       t.integer :recipe_id
-
-      t.timestamps
     end
   end
 end
