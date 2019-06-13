@@ -31,6 +31,7 @@ class RecipesController < ApplicationController
     url[0..url.index("recipe") + 2].join("/") + "/print"
   end
 
+
   def get_recipe_from_print_url(url)
     html = open(url)
     doc = Nokogiri::HTML(html)
@@ -51,9 +52,9 @@ class RecipesController < ApplicationController
       image: doc.css('.recipe-print__recipe-img').attr('src').value,
       ingredients: ingredients,
       steps: steps,
-      prep_time: prep_time_items[1].attr('aria-label'),
-      cook_time: prep_time_items[2].attr('aria-label'),
-      ready_in_time: prep_time_items[3].attr('aria-label'),
+      prep_time: prep_time_items[1].attr('aria-label').strip,
+      cook_time: prep_time_items[2].attr('aria-label').strip,
+      ready_in_time: prep_time_items[3].attr('aria-label').strip,
     }
   end
 end

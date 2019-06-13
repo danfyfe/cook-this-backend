@@ -1,12 +1,18 @@
 class UsersController < ApplicationController
   def create
-    @user = User.create(user_params)
+    if params[:password] === params[:passwordConfirm]
+      @user = User.create(user_params)
 
-    if @user.valid?
-      render json: { token: encode_token(@user) }
+      if @user.valid?
+        render json: { token: encode_token(@user) }
+      else
+        render json: { error: @user.errors.full_messages }
+      end
     else
-      render json: { error: @user.errors.full_messages }
+      render json: { error: "Passwords don't match, bro. 👨‍🍳🔪" }
     end
+
+
   end
 
 
