@@ -52,9 +52,9 @@ class RecipesController < ApplicationController
       image: doc.css('.recipe-print__recipe-img').attr('src').value,
       ingredients: ingredients,
       steps: steps,
-      prep_time: prep_time_items[1].attr('aria-label').strip,
-      cook_time: prep_time_items[2].attr('aria-label').strip,
-      ready_in_time: prep_time_items[3].attr('aria-label').strip,
+      prep_time: prep_time_items.any? ? prep_time_items[1].attr('aria-label').strip : nil,
+      cook_time: prep_time_items.any? ? prep_time_items[2].attr('aria-label').strip : nil,
+      ready_in_time: prep_time_items.any? ? prep_time_items[3].attr('aria-label').strip : nil,
     }
   end
 end
