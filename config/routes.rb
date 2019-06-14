@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   post '/recipes', to: 'recipes#create'
 
   post '/favorites', to: "favorites#create"
+  delete '/favorites/:user_id/:recipe_id', to: "favorites#destroy"
 end
