@@ -17,9 +17,12 @@ class UsersController < ApplicationController
 
 
   def profile
+    token = request.headers[:Authorization]
+    decoded_token = JWT.decode token, "this.cook()", true, { algorithm: 'HS256' }
+    user_id = decoded_token[0]["user_id"]
     @user = User.find(user_id)
 
-    render json: @user
+    render json: {user: @user, favorites: @user.favorites, notes: @user.notes}
   end
 
 

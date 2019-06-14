@@ -7,4 +7,6 @@ Rails.application.routes.draw do
 
   get '/recipes', to: 'recipes#index'
   post '/recipes', to: 'recipes#create'
+
+  post '/favorites', to: "favorites#create"
 end

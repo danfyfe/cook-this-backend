@@ -1,3 +1,3 @@
 class Note < ApplicationRecord
-  belongs_to :recipe_folder
+  belongs_to :favorite
 end

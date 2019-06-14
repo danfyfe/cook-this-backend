@@ -1,6 +1,6 @@
-class CreateRecipeFolders < ActiveRecord::Migration[5.2]
+class CreateFavorites < ActiveRecord::Migration[5.2]
   def change
-    create_table :recipe_folders do |t|
+    create_table :favorites do |t|
       t.integer :user_id
       t.integer :recipe_id
 
