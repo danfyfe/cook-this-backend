@@ -11,8 +11,6 @@ class UsersController < ApplicationController
     else
       render json: { error: "Passwords don't match, bro. 👨‍🍳🔪" }
     end
-
-
   end
 
 
@@ -22,7 +20,7 @@ class UsersController < ApplicationController
     user_id = decoded_token[0]["user_id"]
     @user = User.find(user_id)
 
-    render json: {user: @user, favorites: @user.favorites, notes: @user.notes}
+    render json: {user: @user, favorites: @user.favorites.pluck("recipe_id"), notes: @user.notes}
   end
 
 
