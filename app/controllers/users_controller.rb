@@ -1,9 +1,11 @@
+require_relative "./concerns/avatars_array"
+
 class UsersController < ApplicationController
   def create
     if params[:password] === params[:passwordConfirm]
       @user = User.create(user_params)
-
       if @user.valid?
+        @user.update(image: random_avatar)
         render json: { token: encode_token(@user) }
       else
         render json: { error: @user.errors.full_messages }
