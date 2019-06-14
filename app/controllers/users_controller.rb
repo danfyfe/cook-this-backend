@@ -17,6 +17,7 @@ class UsersController < ApplicationController
 
 
   def profile
+    # no change
     token = request.headers[:Authorization]
     decoded_token = JWT.decode token, "this.cook()", true, { algorithm: 'HS256' }
     user_id = decoded_token[0]["user_id"]
