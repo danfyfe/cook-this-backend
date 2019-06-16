@@ -1,4 +1,11 @@
 class FavoritesController < ApplicationController
+
+  def index
+    @favorites = Favorite.all
+    render json: @favorites
+  end
+
+
   def create
     @user = User.find(params[:user_id])
 

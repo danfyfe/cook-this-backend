@@ -8,6 +8,12 @@ Rails.application.routes.draw do
   get '/recipes', to: 'recipes#index'
   post '/recipes', to: 'recipes#create'
 
+  get '/favorites', to: "favorites#index"
   post '/favorites', to: "favorites#create"
   delete '/favorites/:user_id/:recipe_id', to: "favorites#destroy"
+
+  get '/notes/:recipe_id', to: 'notes#index'
+  patch '/notes/:note_id', to: 'notes#update'
+  delete '/notes/:note_id', to: 'notes#destroy'
+  post '/notes', to: 'notes#create'
 end
