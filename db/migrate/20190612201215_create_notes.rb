@@ -3,8 +3,6 @@ class CreateNotes < ActiveRecord::Migration[5.2]
     create_table :notes do |t|
       t.integer :favorite_id
       t.string :content
-
-      t.timestamps
     end
   end
 end

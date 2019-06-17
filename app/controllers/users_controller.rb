@@ -1,6 +1,11 @@
 require_relative "./concerns/avatars_array"
 
 class UsersController < ApplicationController
+  def index
+    @users = User.all
+    render json: @users, include: [:favorites, :notes]
+  end
+
   def create
     if params[:password] === params[:passwordConfirm]
       @user = User.create(user_params)
@@ -22,7 +27,7 @@ class UsersController < ApplicationController
     user_id = decoded_token[0]["user_id"]
     @user = User.find(user_id)
 
-    render json: {user: @user, favorites: @user.favorites.pluck("recipe_id"), notes: @user.notes}
+    render json: @user, include: [:favorites, :notes]
   end
 
 
