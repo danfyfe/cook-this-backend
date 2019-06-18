@@ -70,7 +70,7 @@ class RecipesController < ApplicationController
       steps: steps,
       prep_time: (prep_time ? prep_time : "No prep time"),
       cook_time: (cook_time ? cook_time : "No cook time"),
-      ready_in_time: (ready_in_time ? ready_in_time : "Cooks ad infinitum"),
+      ready_in_time: (ready_in_time ? ready_in_time : "Cooks forever"),
     }
   end
 end
