@@ -36,6 +36,8 @@ class RecipesController < ApplicationController
     html = open(url)
     doc = Nokogiri::HTML(html)
 
+    description = doc.css('.recipe-print__description').text
+
     ingredients = doc.css('.recipe-print__h2 + ul li, .recipe-print__h2 + ul + ul li').map do |li|
       li.text.strip
     end
@@ -44,17 +46,31 @@ class RecipesController < ApplicationController
       li.text.strip
     end
 
-    prep_time_items = doc.css('.prepTime__item')
+    prep_time_items = doc.css('.prepTime__item').map do |li|
+      li.attr('aria-label')
+    end
+
+    prep_time = prep_time_items.find do |item|
+      item.class === "string" ? item.starts_with?("Prep time") : false
+    end
+
+    cook_time = prep_time_items.find do |item|
+      item.class === "string" ? item.starts_with?("Cook time") : false
+    end
+
+    ready_in_time = prep_time_items.find do |item|
+      item.class === "string" ? item.starts_with?("Ready in") : false
+    end
 
     {
       title: doc.css('.recipe-print__title').text,
-      description: doc.css('.recipe-print__description').text,
+      description: (description ? description : "No description provided"),
       image: doc.css('.recipe-print__recipe-img').attr('src').value,
       ingredients: ingredients,
       steps: steps,
-      prep_time: prep_time_items.any? ? prep_time_items[1].attr('aria-label').strip : nil,
-      cook_time: prep_time_items.any? ? prep_time_items[2].attr('aria-label').strip : nil,
-      ready_in_time: prep_time_items.any? ? prep_time_items[3].attr('aria-label').strip : nil,
+      prep_time: (prep_time ? prep_time : "No prep time"),
+      cook_time: (cook_time ? cook_time : "No cook time"),
+      ready_in_time: (ready_in_time ? ready_in_time : "Cooks ad infinitum"),
     }
   end
 end
