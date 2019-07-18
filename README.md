@@ -1,6 +1,6 @@
 <h2>Welcome to Cook This!</h2>
 
-<em>built with rails version: 2.6.1<em>\
+built with Ruby version: 2.6.1\
 By: Jeff Marks and Dan Fyfe
 
 **Setup**
